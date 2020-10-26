@@ -68,7 +68,7 @@ class HumanPlayer(Player):
         if m in moves:
             return m
         else:
-            self.move()
+            return self.move()
 
 
 # Determines who won the round.
@@ -93,7 +93,7 @@ class Game:
 
     # Prompt the user to play again.
     def play_again(self):
-        again = input("\nDo you want to play again? (Y or N) > ")
+        again = input("\nDo you want to play again? (Y) > ")
 
         if again.strip().lower() in ["y", "n"]:
             return again.strip().lower() == "y"
@@ -105,7 +105,7 @@ class Game:
         if rounds in ["1", "3", "5"]:
             return rounds
         else:
-            self.how_many_rounds()
+            return self.how_many_rounds()
 
     # Plays the round and declars a winner (or a tie).
     def play_round(self):
