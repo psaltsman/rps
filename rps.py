@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 import random
 
-"""This program plays a game of Rock, Paper, Scissors between two Players,
-and reports both Player's scores each round."""
 
 moves = ['rock', 'paper', 'scissors']
 
-"""The Player class is the parent class for all of the Players
-in this game"""
-
 
 class Player:
+
+    def __init__(self):
+        self.score = 0
+
     def move(self):
         return 'rock'
 
@@ -38,16 +37,38 @@ class Game:
     def play_round(self):
         move1 = self.p1.move()
         move2 = self.p2.move()
-        print(f"Player 1: {move1}  Player 2: {move2}")
+        print(f"Player 1: {move1}\nPlayer 2: {move2}")
+
+        if move1 != move2:
+            if beats(move1, move2):
+                self.p1.score += 1
+                print("Player 1 wins this round!")
+            else:
+                self.p2.score += 1
+                print("Player 2 wins this round!")
+        else:
+            print("*** TIE ***")
+
         self.p1.learn(move1, move2)
         self.p2.learn(move2, move1)
 
     def play_game(self):
         print("Game start!")
         for round in range(3):
-            print(f"Round {round}:")
+            print(f"\nRound {round + 1}:")
             self.play_round()
-        print("Game over!")
+
+        print(f"\nFinal score:\nPlayer 1: {self.p1.score}" +
+              "\nPlayer 2: {self.p2.score}")
+
+        if self.p1.score > self.p2.score:
+            print("Player 1 wins the game!")
+        elif self.p2.score > self.p1.score:
+            print("Player 2 wins the game!")
+        else:
+            print("*** Tie game ***")
+
+        print("\nGame over!")
 
 
 if __name__ == '__main__':
