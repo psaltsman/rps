@@ -11,7 +11,7 @@ class Player:
         self.score = 0
 
     def move(self):
-        pass
+        return "rock"
 
     def learn(self, my_move, their_move):
         pass
@@ -22,18 +22,6 @@ class RandomPlayer(Player):
 
     def move(self):
         return random.choice(moves)
-
-
-# HumanPlayer class allows the user to enter their move.
-class HumanPlayer(Player):
-
-    def move(self):
-        m = input("Rock, paper, scissors? > ").strip().lower()
-
-        if m in moves:
-            return m
-        else:
-            self.move()
 
 
 # ReflectPlayer plays their opponents last move from the previous round,
@@ -69,6 +57,18 @@ class CyclePlayer(Player):
             self.next_move = "scissors"
         elif my_move == "scissors":
             self.next_move = "rock"
+
+
+# HumanPlayer class allows the user to enter their move.
+class HumanPlayer(Player):
+
+    def move(self):
+        m = input("Rock, paper, scissors? > ").strip().lower()
+
+        if m in moves:
+            return m
+        else:
+            self.move()
 
 
 # Determines who won the round.
@@ -161,15 +161,17 @@ class Game:
 # player.
 def start_game():
 
-    who_to_play = random.choice(range(3))
+    who_to_play = random.choice(range(4))
 
-    # Random player
+    # Player
     if who_to_play == 0:
+        game = Game(HumanPlayer(), Player())
+    # Random player
+    elif who_to_play == 1:
         game = Game(HumanPlayer(), RandomPlayer())
     # Reflect player
-    elif who_to_play == 1:
+    elif who_to_play == 2:
         game = Game(HumanPlayer(), ReflectPlayer())
-    # Cycle player
     else:
         game = Game(HumanPlayer(), CyclePlayer())
 
