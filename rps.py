@@ -2,7 +2,7 @@
 import random
 
 
-moves = ['rock', 'paper', 'scissors']
+moves = ["rock", "paper", "scissors"]
 
 
 class Player:
@@ -73,16 +73,16 @@ class CyclePlayer(Player):
 
 # Determines who won the round.
 def beats(one, two):
-    if one == 'rock' and two == 'scissors':
-        print("\n>>> Rock SMASHES Scissors <<<\n")
-    elif one == 'scissors' and two == 'paper':
-        print("\n>>> Scissors CUT paper <<<\n")
+    if one in ["rock", "scissors"] and two in ["rock", "scissors"]:
+        print("\n>>> Rock beats scissors <<<\n")
+    elif one in ["scissors", "paper"] and two in ["scissors", "paper"]:
+        print("\n>>> Scissors beat paper <<<\n")
     else:
-        print("\n>>> Paper COVERS Rock <<<\n")
+        print("\n>>> Paper beats rock <<<\n")
 
-    return ((one == 'rock' and two == 'scissors') or
-            (one == 'scissors' and two == 'paper') or
-            (one == 'paper' and two == 'rock'))
+    return ((one == "rock" and two == "scissors") or
+            (one == "scissors" and two == "paper") or
+            (one == "paper" and two == "rock"))
 
 
 # Game class plays the game.
@@ -176,6 +176,6 @@ def start_game():
     game.play_game()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     start_game()
